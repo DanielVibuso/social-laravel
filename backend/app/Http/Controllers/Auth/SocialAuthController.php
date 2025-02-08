@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\SocialAccount;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Support\Facades\Auth;
 
 class SocialAuthController extends Controller
 {
@@ -30,20 +29,13 @@ class SocialAuthController extends Controller
             if ($socialAccount) {
                 $user = $socialAccount->user;
             } else {
-                // Se não encontrar, procura pelo email na tabela de usuários
-                //$user = User::where('email', $socialUser->getEmail())->first();
-    
-                //if (!$user) {
-                    // Cria um novo usuário sem nome e sem senha
                     $user = User::create([
                         'profile_id' => Profile::where('name', ProfileEnum::USER->value)->first()->id,
                         'email' => $socialUser->getEmail() ?? null,
-                        'name' => null, // Nome será definido depois
-                        'password' => null, // Não precisa de senha para login social
+                        'name' => null, 
+                        'password' => null,
                     ]);
-                //}
     
-                // Associa a conta social ao novo usuário
                 SocialAccount::create([
                     'user_id' => $user->id,
                     'provider' => $provider,
@@ -52,17 +44,31 @@ class SocialAuthController extends Controller
                 ]);
             }
     
-            // Gera um token de autenticação
             $token = $user->createToken('auth_token')->plainTextToken;
     
-            // Responde com o token, dados do usuário e se precisa ou não definir o nome
             return response()->json([
                 'token' => $token,
                 'user' => $user,
-                'needs_name' => is_null($user->name) // Indica se precisa definir um nome
+                'needs_name' => is_null($user->name) 
             ]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage() . $e->getLine()], 500);
         }
+    }
+
+    public function setName(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|min:3|max:255',
+        ]);
+
+        $user = auth()->user();
+        $user->name = $validated['name'];
+        $user->save();
+
+        return response()->json([
+            'user' => $user,
+            'needs_name' => false, 
+        ]);
     }
 }

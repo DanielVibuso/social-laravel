@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->prefix('auth')->name('auth.')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    /*Para fins de testes de autorização de acesso, não remover*/
+    /*authorization tests*/
     Route::name('authorization.')->group(function () {
         Route::get('/test', function () {
             return response()->json('Access right granted');
@@ -88,6 +88,6 @@ Route::prefix('system')->middleware('auth:sanctum')->group(function () {
 
 Route::fallback(function () {
     return response()->json([
-        'message' => 'URL INVÁLIDA',
+        'message' => 'INVALID URL',
     ], 404);
 });

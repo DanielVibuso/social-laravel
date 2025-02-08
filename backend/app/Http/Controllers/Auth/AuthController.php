@@ -34,7 +34,7 @@ class AuthController extends Controller
         } catch (Exception $e) {
             Log::error($e->getMessage());
 
-            return response()->json('erro interno', 422);
+            return response()->json('internal error', 422);
         }
     }
 
@@ -52,7 +52,7 @@ class AuthController extends Controller
         } catch (Exception $e) {
             Log::error($e->getMessage());
 
-            return response()->json('erro interno', 422);
+            return response()->json('internal error', 422);
         }
     }
 
@@ -66,11 +66,11 @@ class AuthController extends Controller
         try {
             $this->authService->forgotPassword($request);
 
-            return response()->json(['message' => 'Enviado email para recuperação de senha'], 200);
+            return response()->json(['message' => 'recover password email sent'], 200);
         } catch (Exception $e) {
             Log::error($e->getMessage());
 
-            return response()->json('erro interno', 422);
+            return response()->json('internal error', 422);
         }
     }
 
@@ -83,14 +83,14 @@ class AuthController extends Controller
     {
         try {
             if ($this->authService->updatePassword($request)) {
-                return response()->json(['message' => 'senha alterada com sucesso'], 200);
+                return response()->json(['message' => 'password updated'], 200);
             }
 
-            return response()->json(['message' => 'não foi possível redefinir a senha'], 422);
+            return response()->json(['message' => 'cant update password'], 422);
         } catch (Exception $e) {
             Log::error($e->getMessage());
 
-            return response()->json('erro interno', 422);
+            return response()->json('internal error', 422);
         }
     }
 }
