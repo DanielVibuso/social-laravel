@@ -46,6 +46,8 @@ this seed you generate a user with the email: admin@curotec.com.br (my bad for "
 you can see the routes in the http://localhost/docs/api#/ <br>
 if you want to run the backend tests you can do: <br>
 docker-compose exec app_curotec php artisan test <br>
+![image](https://github.com/user-attachments/assets/00efc038-ec8e-4c21-8ace-a96c73cb04eb)
+
 
 You can access the documentation of the endpoints in the url: http://localhost/docs/api#/  <br>
 
