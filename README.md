@@ -26,4 +26,5 @@ To run this project just open your terminal on this root folder and: <br>
 if you want to run the backend tests you can do: <br>
 docker-compose exec app_curotec php artisan test <br>
 
-# TODO: frontend
+# frontend 
+WORK IN PROGRESS, you can see on the DRAFT PULL REQUEST
