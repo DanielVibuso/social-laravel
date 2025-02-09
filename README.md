@@ -20,9 +20,30 @@ To run this project just open your terminal on this root folder and: <br>
 1 - docker-compose build <br>
 2 - docker-compose up -d  <br>
 3 - docker-compose exec app_curotec composer install <br>
+3.2 before use the artisan you should create your own .env that must contains the following env vars that are being used in the docker-compose: <br>
+```
+DB_CONNECTION=pgsql
+DB_HOST=postgres_curotec
+DB_PORT=5432
+DB_DATABASE=curotecschema
+DB_USERNAME=curotec
+DB_PASSWORD=987654321
+
+#consumer api key
+TWITTER_CLIENT_ID=your consumer api key from twitter developers page here
+#consumer api key secret
+TWITTER_CLIENT_SECRET=your consumer api key secret from twitter developers page here
+TWITTER_REDIRECT_URL=http://localhost:80/auth/twitter/callback #this url must exists at your application in order to the socialite work fine.
+#bearer token
+TWITTER_BEARER_TOKEN=your bearer token from twitter developers page here
+```
+ <br>
+3.3 - docker-compose exec app_curotec php artisan key:generate <br>
 4 - docker-compose exec app_curotec php artisan migrate <br>
 5 - docker-compose exec app_curotec php artisan db:seed <br>
 
+this seed you generate a user with the email: admin@curotec.com.br (my bad for ".br" XD ) and password: qwe123
+you can see the routes in the http://localhost/docs/api#/ <br>
 if you want to run the backend tests you can do: <br>
 docker-compose exec app_curotec php artisan test <br>
 
