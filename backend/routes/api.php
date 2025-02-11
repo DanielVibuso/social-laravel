@@ -5,6 +5,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\SocialAuthController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,6 +79,8 @@ Route::middleware('auth:sanctum')->prefix('permission')->name('permission.')->co
     Route::middleware('ability:permission.destroy')->delete('/{id}', 'destroy')->name('delete');
     Route::middleware('ability:permission.profileBinded')->get('/{id}/profileBinded', 'profileBinded')->name('profileBinded');
 });
+
+Route::get('/created-post', [PostController::class, 'createPost']); //mock route
 
 
 Route::prefix('system')->middleware('auth:sanctum')->group(function () {
