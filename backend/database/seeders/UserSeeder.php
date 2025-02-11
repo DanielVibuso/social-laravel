@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     {
         User::create([
             'profile_id' => Profile::where('name', ProfileEnum::ADMIN->value)->first()->id,
-            'email' => 'admin@curotec.com.br',
+            'email' => 'admin@curotec.com',
             'password' => 'qwe123',
         ]);
     }
