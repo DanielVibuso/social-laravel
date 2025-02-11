@@ -13,6 +13,8 @@ Scramble: Swagger/Open API Documentation<br>
 
 ## features added since last update
 
+Realtime updates: go to the last pr to see the updates <br>
+
 Social Login with socialite, using Twitter as base. <br>
 To use this feature you will need to provide your secrets and tokens generated from twitter developers pages at the env of this project.<br>
 
